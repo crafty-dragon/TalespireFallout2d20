@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Fallout 2d20</title>
+    <link rel="stylesheet" href="fallout_sheet.css">
+    <script src="fallout_sheet.js" defer></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="content-row">
+            <label class="field-title">PC</label><input id="character-name" type="text" class="field-data"></input><p class="field-desc">Character name</p>
+        </div>
+        <div class="content-row">
+            <label class="field-title">Origin</label><input id="origin" type="text" class="field-data"></input><p class="field-desc"></p>
+        </div>
+        <div class="content-row">
+            <label class="field-title">Level</label><input id="level" type="number" class="field-data"></input><p class="field-desc">Character Level</p>
+        </div>
+        <div class="content-row">
+            <label class="field-title">XP</label><input id="experience-points" type="number" class="field-data"><p class="field-desc">Charater XP</p>
+        </div>
+    </div>
+    <div class="container">
+        <table class="container">
+            <tr>
+                <td><label class="field-title">Maximum HP</label></td>
+                <td><input class="field-data" id="max-health-points" type="number"></td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="field-title">Current HP</label>
+                </td>
+                <td><input class="field-data" id="current-health-points" type="number"></td>
+            </tr>
+            <tr>
+                <td><label class="field-title">Radiation</label></td>
+                <td><input class="field-data" id="radiation-points" type="number"></td>
+            </tr>
+        </table>
+    </div>
+    <hr>
+    <div class="container">
+        <h1>S.P.E.C.I.A.L. Attributes</h1>
+        <div class="content-row">
+            <label class="field-title">STR</label><input id="strength" class="field-data-short" type="number"><p class="field-desc">Strength</p>
+        </div>
+        <div class="content-row">
+            <label class="field-title">PER</label><input id="perception" class="field-data-short" type="number"><p class="field-desc">Perception</p>
+        </div>
+        <div class="content-row">
+            <label class="field-title">END</label><input id="endurance" class="field-data-short" type="number"><p class="field-desc">Endurance</p>
+        </div>
+        <div class="content-row">
+            <label class="field-title">CHA</label><input id="charisma" class="field-data-short" type="number"><p class="field-desc">Charisma</p>
+        </div>
+        <div class="content-row">
+            <label class="field-title">INT</label><input id="intelligence" class="field-data-short" type="number"><p class="field-desc">Intelligence</p>
+        </div>
+        <div class="content-row">
+            <label class="field-title">AGI</label><input id="agility" class="field-data-short" type="number"><p class="field-desc">Agility</p>
+        </div>
+        <div class="content-row">
+            <label class="field-title">LCK</label><input id="luck" class="field-data-short" type="number"><p class="field-desc">Luck</p>
+        </div>
+        <label class="field-desc">Values between 1-10</label>
+        <div class="content-row">
+            <label class="skill-title">Luck Points</label><input id="luck-points" class="field-data-short" type="number"><p class="field-desc">Starts equal to LCK</p>
+        </div>
+    </div>
+    <hr>
+    <div class="container">
+        <h1>Hit Locations Rolls</h1>
+        <button id="humanoid-locations" onclick="rollHitLocations('humanoid')">Humanoid</button>
+        <button id="quadruped-locations" onclick="rollHitLocations('quadruped')">Quadruped</button>
+        <button id="flying-insect-locations" onclick="rollHitLocations('flying-insect')">Flying Insect</button>
+        <button id="mr-handy-locations" onclick="rollHitLocations('mr-handy')">Mr. Handy</button>
+        <button id="eyebot-locations" onclick="rollHitLocations('eyebot')">Eyebot</button>
+        <br>
+        <h1>Damage Dice Rolls</h1>
+        <table class="container">
+            <tr>
+                <td>
+                    <label class="field-title">
+                        Number of dice
+                    </label>
+                </td>
+                <td>
+                    <input class="field-data-short" type="number" id="damage-dice-number">
+                </td>
+                <td>
+                    <button id="damage-dice-roller" onclick="rollDamageDice()">Roll Damage Dice</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <hr>
+    <div class="container">
+        <h1>Skills</h1>
+        <table class="container">
+            <thead>
+                <tr>
+                    <td>
+                        Skills
+                    </td>
+                    <td>
+                        Value
+                    </td>
+                    <td>
+                        Is Tagged?
+                    </td>
+                    <td>
+                        Roller Amount
+                    </td>
+                    <td>
+                        Roll!
+                    </td>
+                </tr>
+            </thead>
+            <tr>
+                <td>
+                    <label class="skill-title">Athletics (STR)</label>
+                </td>
+                <td>
+                    <input id="athletics-tn" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <input id="athletics-tagged" class="field-data" type="checkbox">
+                </td>
+                <td>
+                    <input id="athletics-dice-amount" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <button id="athletics-roller" onclick="rollSkillCheck('athletics')">Roll Athletics</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="skill-title">Barter (CHA)</label>
+                </td>
+                <td>
+                    <input id="barter-tn" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <input id="barter-tagged" class="field-data" type="checkbox">
+                </td>
+                <td>
+                    <input id="barter-dice-amount" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <button id="barter-roller" onclick="rollSkillCheck('barter')">Roll Barter</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="skill-title">Big Guns (END)</label>
+                </td>
+                <td>
+                    <input id="big-guns-tn" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <input id="big-guns-tagged" class="field-data" type="checkbox">
+                </td>
+                <td>
+                    <input id="big-guns-dice-amount" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <button id="big-guns-roller" onclick="rollSkillCheck('big-guns')">Roll Big Guns</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="skill-title">Energy Weapons (PER)</label>
+                </td>
+                <td>
+                    <input id="energy-weapons-tn" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <input id="energy-weapons-tagged" class="field-data" type="checkbox">
+                </td>
+                <td>
+                    <input id="energy-weapons-dice-amount" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <button id="energy-weapons-roller" onclick="rollSkillCheck('energy-weapons')">Roll Energy Weapons</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="skill-title">Explosives (PER)</label>
+                </td>
+                <td>
+                    <input id="explosives-tn" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <input id="explosives-tagged" class="field-data" type="checkbox">
+                </td>
+                <td>
+                    <input id="explosives-dice-amount" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <button id="explosives-roller" onclick="rollSkillCheck('explosives')">Roll Explosives</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="skill-title">Lockpick (PER)</label>
+                </td>
+                <td>
+                    <input id="lockpick-tn" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <input id="lockpick-tagged" class="field-data" type="checkbox">
+                </td>
+                <td>
+                    <input id="lockpick-dice-amount" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <button id="lockpick-roller" onclick="rollSkillCheck('lockpick')">Roll Lockpick</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="skill-title">Medicine (INT)</label>
+                </td>
+                <td>
+                    <input id="medicine-tn" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <input id="medicine-tagged" class="field-data" type="checkbox">
+                </td>
+                <td>
+                    <input id="medicine-dice-amount" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <button id="medicine-roller" onclick="rollSkillCheck('medicine')">Roll Medicine</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="skill-title">Melee Weapons (STR)</label>
+                </td>
+                <td>
+                    <input id="melee-tn" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <input id="melee-tagged" class="field-data" type="checkbox">
+                </td>
+                <td>
+                    <input id="melee-dice-amount" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <button id="melee-roller" onclick="rollSkillCheck('melee')">Roll Melee Weapons</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="skill-title">Pilot (PER)</label>
+                </td>
+                <td>
+                    <input id="pilot-tn" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <input id="pilot-tagged" class="field-data" type="checkbox">
+                </td>
+                <td>
+                    <input id="pilot-dice-amount" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <button id="pilot-roller" onclick="rollSkillCheck('pilot')">Roll Pilot</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="skill-title">Repair (INT)</label>
+                </td>
+                <td>
+                    <input id="repair-tn" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <input id="repair-tagged" class="field-data" type="checkbox">
+                </td>
+                <td>
+                    <input id="repair-dice-amount" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <button id="repair-roller" onclick="rollSkillCheck('repair')">Roll Repair</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="skill-title">Science (INT)</label>
+                </td>
+                <td>
+                    <input id="science-tn" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <input id="science-tagged" class="field-data" type="checkbox">
+                </td>
+                <td>
+                    <input id="science-dice-amount" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <button id="science-roller" onclick="rollSkillCheck('science')">Roll Science</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="skill-title">Small Guns (AGI)</label>
+                </td>
+                <td>
+                    <input id="small-guns-tn" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <input id="small-guns-tagged" class="field-data" type="checkbox">
+                </td>
+                <td>
+                    <input id="small-guns-dice-amount" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <button id="small-guns-roller" onclick="rollSkillCheck('small-guns')">Roll Small Guns</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="skill-title">Sneak (AGI)</label>
+                </td>
+                <td>
+                    <input id="sneak-tn" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <input id="sneak-tagged" class="field-data" type="checkbox">
+                </td>
+                <td>
+                    <input id="sneak-dice-amount" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <button id="sneak-roller" onclick="rollSkillCheck('sneak')">Roll Sneak</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="skill-title">Speech (CHA)</label>
+                </td>
+                <td>
+                    <input id="speech-tn" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <input id="speech-tagged" class="field-data" type="checkbox">
+                </td>
+                <td>
+                    <input id="speech-dice-amount" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <button id="speech-roller" onclick="rollSkillCheck('speech')">Roll Speech</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="skill-title">Survival (END)</label>
+                </td>
+                <td>
+                    <input id="survival-tn" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <input id="survial-tagged" class="field-data" type="checkbox">
+                </td>
+                <td>
+                    <input id="survival-dice-amount" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <button id="survival-roller" onclick="rollSkillCheck('survival')">Roll Survival</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="skill-title">Throwing (AGI)</label>
+                </td>
+                <td>
+                    <input id="throwing-tn" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <input id="throwing-tagged" class="field-data" type="checkbox">
+                </td>
+                <td>
+                    <input id="throwing-dice-amount" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <button id="throwing-roller" onclick="rollSkillCheck('throwing')">Roll Throwing</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="skill-title">Unarmed (STR)</label>
+                </td>
+                <td>
+                    <input id="unarmed-tn" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <input id="unarmed-tagged" class="field-data" type="checkbox">
+                </td>
+                <td>
+                    <input id="unarmed-dice-amount" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <button id="unarmed-roller" onclick="rollSkillCheck('unarmed')">Roll Unarmed</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <hr>
+    <div class="container">
+        <h1>Derived Stats</h1>
+        <table class="container">
+            <tr>
+                <td>
+                    <label class="skill-title">Max Cap</label>
+                </td>
+                <td>
+                    <input id="max-capacity" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <p class="skill-desc">150 + (STR * 10)</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="skill-title">Initiative</label>
+                </td>
+                <td>
+                    <input id="initiative-value" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <p class="skill-desc">PER + AGI</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="skill-title">Defense</label>
+                </td>
+                <td>
+                    <input id="defense-value" class="field-data-short" type="number">
+                </td>
+            </tr>  
+            <tr>
+                <td>
+                    <label class="skill-title">Melee Damage</label>
+                </td>
+                <td>
+                    <input id="melee-damage" class="field-data-short" type="number">
+                </td>
+                <td>
+                    <p class="skill-desc">How many dice?</p>
+                </td>
+            </tr>   
+        </table>
+    </div>
+    <hr>
+    <div class="container">
+        <h1>Damage Resistances and Injuries</h1>
+        <table>
+            <thead>
+                <tr>
+                    <td>
+                        Body Part
+                    </td>
+                    <td>
+                        Physical
+                    </td>
+                    <td>
+                        Energy
+                    </td>
+                    <td>
+                        Radiation
+                    </td>
+                    <td>
+                        Poison
+                    </td>
+                    <td>
+                        Is Injured?
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Head/Optics</td>
+                    <td><input id="head-physical-damage-resist" class="field-data-short" type="number"></td>
+                    <td><input id="head-energy-damage-resist" class="field-data-short" type="number"></td>
+                    <td><input id="head-radiation-damage-resist" class="field-data-short" type="number"></td>
+                    <td><input id="head-poison-damage-resist" class="field-data-short" type="number"></td>
+                    <td><input id="head-injured" type="checkbox"></td>
+                </tr>
+                <tr>
+                    <td>Torso/Main Body</td>
+                    <td><input id="torso-physical-damage-resist" class="field-data-short" type="number"></td>
+                    <td><input id="torso-energy-damage-resist" class="field-data-short" type="number"></td>
+                    <td><input id="torso-radiation-damage-resist" class="field-data-short" type="number"></td>
+                    <td><input id="torso-poison-damage-resist" class="field-data-short" type="number"></td>
+                    <td><input id="torso-injured" type="checkbox"></td>
+                </tr>
+                <tr>
+                    <td>Left Arm/Arm 1</td>
+                    <td><input id="left-arm-physical-damage-resist" class="field-data-short" type="number"></td>
+                    <td><input id="left-arm-energy-damage-resist" class="field-data-short" type="number"></td>
+                    <td><input id="left-arm-radiation-damage-resist" class="field-data-short" type="number"></td>
+                    <td><input id="left-arm-poison-damage-resist" class="field-data-short" type="number"></td>
+                    <td><input id="left-arm-injured" type="checkbox"></td>
+                </tr>
+                <tr>
+                    <td>Right Arm/Arm 2</td>
+                    <td><input id="right-arm-physical-damage-resist" class="field-data-short" type="number"></td>
+                    <td><input id="right-arm-energy-damage-resist" class="field-data-short" type="number"></td>
+                    <td><input id="right-arm-radiation-damage-resist" class="field-data-short" type="number"></td>
+                    <td><input id="right-arm-poison-damage-resist" class="field-data-short" type="number"></td>
+                    <td><input id="right-arm-injured" type="checkbox"></td>
+                </tr>
+                <tr>
+                    <td>Left Leg/Arm 3</td>
+                    <td><input id="left-leg-physical-damage-resist" class="field-data-short" type="number"></td>
+                    <td><input id="left-leg-energy-damage-resist" class="field-data-short" type="number"></td>
+                    <td><input id="left-leg-radiation-damage-resist" class="field-data-short" type="number"></td>
+                    <td><input id="left-leg-poison-damage-resist" class="field-data-short" type="number"></td>
+                    <td><input id="left-leg-injured" type="checkbox"></td>
+                </tr>
+                <tr>
+                    <td>Right Leg/Thruster</td>
+                    <td><input id="right-leg-physical-damage-resist" class="field-data-short" type="number"></td>
+                    <td><input id="right-leg-energy-damage-resist" class="field-data-short" type="number"></td>
+                    <td><input id="right-leg-radiation-damage-resist" class="field-data-short" type="number"></td>
+                    <td><input id="right-leg-poison-damage-resist" class="field-data-short" type="number"></td>
+                    <td><input id="right-leg-injured" type="checkbox"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <div class="container">
+        <h1 id="perks-section">Perks</h1>
+        <div class="content-row">
+            <textarea id="perks-text" aria-labelledby="perks-section"></textarea>
+        </div>
+    </div>
+    <hr>
+    <div class="container">
+        <h1>Status</h1>
+        <br>
+        <h2>Hunger</h2>
+        <div class="container" style="font-size: small;">
+            <label class="field-title" for="status-full">Full</label><input type="radio" class="field-data-short" id="status-full" name="hunger">
+            <label class="field-title" for="status-sated">Sated</label><input type="radio" class="field-data-short" id="status-sated" name="hunger">
+            <label class="field-title" for="status-peckish">Peckish</label><input type="radio" class="field-data-short" id="status-peckish" name="hunger">
+            <label class="field-title" for="status-hungry">Hungry</label><input type="radio" class="field-data-short" id="status-hungry" name="hunger">
+            <label class="field-title" for="status-starving">Starving</label><input type="radio" class="field-data-short" id="status-starving" name="hunger">
+        </div>
+        <br>
+        <h2>Thirst</h2>
+        <div class="container" style="font-size: small;">
+            <label class="field-title" for="status-quenched">Quenched</label><input type="radio" class="field-data-short" id="status-quenched" name="thirst">
+            <label class="field-title" for="status-hydrated">Hydrated</label><input type="radio" class="field-data-short" id="status-hydrated" name="thirst">
+            <label class="field-title" for="status-thirsty">Thirsty</label><input type="radio" class="field-data-short" id="status-thirsty" name="thirst">
+            <label class="field-title" for="status-dehydrated">Dehydrated</label><input type="radio" class="field-data-short" id="status-dehydrated" name="thirst">
+        </div>
+        <br>
+        <h2>Sleep</h2>
+        <div class="container" style="font-size: small;">
+            <label class="field-title" for="status-rested">Rested</label><input type="radio" class="field-data-short" id="status-rested" name="sleep">
+            <label class="field-title" for="status-tired">Tired</label><input type="radio" class="field-data-short" id="status-tired" name="sleep">
+            <label class="field-title" for="status-weary">Weary</label><input type="radio" class="field-data-short" id="status-weary" name="sleep">
+            <label class="field-title" for="status-exhausted">Exhausted</label><input type="radio" class="field-data-short" id="status-exhausted" name="sleep">
+        </div>
+    </div>
+    <hr>
+    <div class="container">
+        <h1 id="addiction-section">Addictions</h1>
+        <div class="content-row">
+            <textarea id="addiction-text" aria-labelledby="addiction-section"></textarea>
+        </div>
+        <br>
+        <h1 id="disease-section">Diseases</h1>
+        <div class="content-row">
+            <textarea id="disease-text" aria-labelledby="disease-section"></textarea>
+        </div>
+        <br>
+        <h1 id="robot-modules-section">Robot Modules</h1>
+        <div class="content-row">
+            <textarea id="robot-modules-text" aria-labelledby="robot-modules-section"></textarea>
+        </div>
+    </div>
+    <hr>
+    <div class="container">
+        <h1 id="inventory-section">Inventory</h1>
+        <div class="content-row">
+            <textarea id="inventory-text" aria-labelledby="inventory-section"></textarea>
+        </div>
+    </div>
+
+    <div class="content-row" style="margin-bottom: 0">
+        <span style="flex-grow: 1"></span>
+        <button id="clear-storage" class="" style="margin: 3em 0 0 0" onclick="clearSheet()" disabled>Character Sheet Empty</button>
+    </div>
+</body>
+</html>

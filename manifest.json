@@ -1,0 +1,42 @@
+{
+  "manifestVersion": 1,
+  "name": "Fallout Char Sheet & Dice Roller",
+  "summary": "A freshly generated symbiote",
+  "descriptionFilePath": "/README.md",
+  "version": "0.0.1",
+  "license": "MIT",
+  "about": {
+    "website": "https://www.example.com/Fallout+Char+Sheet+%26+Dice+Roller",
+    "authors": ["Ghost Dragon"]
+  },
+  "kind": "webView",
+  "entryPoint": "/index.html",
+  "api": {
+    "version": "0.1",
+    "initTimeout": 10,
+    "subscriptions": {
+      "dice": {
+        "onRollResults": "handleRollResult"
+      },
+      "symbiote": {
+        "onVisibilityEvent": "logSymbioteEvent",
+        "onStateChangeEvent": "onStateChangeEvent"
+      }
+    },
+    "interop": {
+      "id": "ffabe29a-8bc7-4593-916c-b6573b264e0f"
+    }
+  },
+  "environment": {
+    "capabilities": [
+      "playAudio"
+    ],
+    "extras": [
+      "diceFinder",
+      "icons",
+      "fonts",
+      "colorStyles"
+    ],
+    "webViewBackgroundColor": "#000"
+  }
+}
