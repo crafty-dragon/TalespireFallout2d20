@@ -6,7 +6,7 @@
   "version": "0.0.1",
   "license": "MIT",
   "about": {
-    "website": "https://www.example.com/Fallout+Char+Sheet+%26+Dice+Roller",
+    "website": "https://github.com/crafty-dragon/TalespireFallout2d20",
     "authors": ["Ghost Dragon"]
   },
   "kind": "webView",
