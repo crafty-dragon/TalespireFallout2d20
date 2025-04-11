@@ -1,9 +1,9 @@
 {
   "manifestVersion": 1,
-  "name": "Fallout Char Sheet & Dice Roller",
+  "name": "Fallout Char Sheet & Dice Roller - Testing version",
   "summary": "A freshly generated symbiote",
   "descriptionFilePath": "/README.md",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "about": {
     "website": "https://github.com/crafty-dragon/TalespireFallout2d20",
